@@ -1,17 +1,9 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, f1_score, precision_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 from src.data import load_data
-
-
-def calculate_metrics(y_true, y_pred):
-    """Calculate weighted F1-Score and precision for model predictions."""
-    return {
-        "f1_score": f1_score(y_true, y_pred, average="weighted"),
-        "precision": precision_score(y_true, y_pred, average="weighted"),
-    }
 
 
 def train_models(
@@ -48,7 +40,6 @@ def train_models(
         results[name] = {
             "model": model,
             "accuracy": accuracy_score(y_test, predictions),
-            **calculate_metrics(y_test, predictions),
         }
 
     return results
